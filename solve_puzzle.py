@@ -1,3 +1,4 @@
+from __future__ import print_function
 from puzzlepiece import PuzzlePiece
 
 
@@ -41,34 +42,34 @@ def debug(*message):
         for item in message:
             output.append(str(item))
 
-        print ''.join(output)
+        print (''.join(output))
 
 
 # Yes I know, I should be using loops to print out the board
 # so that it can be an arbitrary size.
 def print_board(board):
-    print "==========================="
-    print '  ', board[0][0].north(), '      ', board[0][1].north(), '      ', board[0][2].north(), '  '
-    print board[0][0].west(), '**', board[0][0].east(), '', \
-          board[0][1].west(), '**', board[0][1].east(), '', \
-          board[0][2].west(), '**', board[0][2].east(), ''
-    print '  ', board[0][0].south(), '      ', board[0][1].south(), '      ', board[0][2].south(), '  '
-    print
+    print ("===========================")
+    print ('  ', board[0][0].north(), '      ', board[0][1].north(), '      ', board[0][2].north(), '  ')
+    print (board[0][0].west(), '**', board[0][0].east(), '',
+          board[0][1].west(), '**', board[0][1].east(), '',
+          board[0][2].west(), '**', board[0][2].east(), '')
+    print ('  ', board[0][0].south(), '      ', board[0][1].south(), '      ', board[0][2].south(), '  ')
+    print ()
 
-    print '  ', board[1][0].north(), '      ', board[1][1].north(), '      ', board[1][2].north(), '  '
-    print board[1][0].west(), '**', board[1][0].east(), '', \
-          board[1][1].west(), '**', board[1][1].east(), '', \
-          board[1][2].west(), '**', board[1][2].east(), ''
-    print '  ', board[1][0].south(), '      ', board[1][1].south(), '      ', board[1][2].south(), '  '
-    print
+    print ('  ', board[1][0].north(), '      ', board[1][1].north(), '      ', board[1][2].north(), '  ')
+    print (board[1][0].west(), '**', board[1][0].east(), '',
+          board[1][1].west(), '**', board[1][1].east(), '',
+          board[1][2].west(), '**', board[1][2].east(), '')
+    print ('  ', board[1][0].south(), '      ', board[1][1].south(), '      ', board[1][2].south(), '  ')
+    print ()
 
-    print '  ', board[2][0].north(), '      ', board[2][1].north(), '      ', board[2][2].north(), '  '
-    print board[2][0].west(), '**', board[2][0].east(), '', \
-          board[2][1].west(), '**', board[2][1].east(), '', \
-          board[2][2].west(), '**', board[2][2].east(), ''
-    print '  ', board[2][0].south(), '      ', board[2][1].south(), '      ', board[2][2].south(), '  '
-    print "==========================="
-    print
+    print ('  ', board[2][0].north(), '      ', board[2][1].north(), '      ', board[2][2].north(), '  ')
+    print (board[2][0].west(), '**', board[2][0].east(), '',
+          board[2][1].west(), '**', board[2][1].east(), '',
+          board[2][2].west(), '**', board[2][2].east(), '')
+    print ('  ', board[2][0].south(), '      ', board[2][1].south(), '      ', board[2][2].south(), '  ')
+    print ("===========================")
+    print ()
 
 
 # Try to place a piece on the board
@@ -85,7 +86,7 @@ def place_piece(path, board, path_idx, pieces, used):
 
     # No pieces left to try... return
     if path_idx >= len(path):
-        print "I win?!?!\n\n"
+        print ("I win?!?!\n\n")
 
         print_board(board)
 
@@ -98,23 +99,23 @@ def place_piece(path, board, path_idx, pieces, used):
     # Yes I know using constants is bad and will
     # keep this from working on board sizes other then 3x3
 
-    if (pos_x -1) != -1:
-        north = board[pos_x -1][pos_y].south()
+    if (pos_x - 1) != -1:
+        north = board[pos_x - 1][pos_y].south()
     else:
         north = unknown.south()
 
-    if (pos_x +1) != 3:
-        south = board[pos_x +1][pos_y].north()
+    if (pos_x + 1) != 3:
+        south = board[pos_x + 1][pos_y].north()
     else:
         south = unknown.north()
 
-    if (pos_y -1) != -1:
-        west = board[pos_x][pos_y -1].east()
+    if (pos_y - 1) != - 1:
+        west = board[pos_x][pos_y - 1].east()
     else:
         west = unknown.east()
 
-    if (pos_y +1) != 3:
-        east = board[pos_x][pos_y +1].west()
+    if (pos_y + 1) != 3:
+        east = board[pos_x][pos_y + 1].west()
     else:
         east = unknown.west()
 
@@ -154,4 +155,4 @@ def place_piece(path, board, path_idx, pieces, used):
 used = []
 place_piece(path, board, 0, pieces, used)
 
-print "huh?\n"
+print ("huh?\n")
