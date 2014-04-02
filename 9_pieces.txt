@@ -1,0 +1,14 @@
+C = Club
+D = Diamond
+H = Heart
+S = Spade
+
+1: S+ D+ H- D-
+2: H+ D+ C- C-
+3: H+ S+ S- C-
+4: H+ D+ D- H-
+5: D+ C+ C- D-
+6: S+ S+ H- C-
+7: C+ H+ S- H-
+8: C+ H+ D- C-
+9: S+ D+ S- H-
