@@ -2,4 +2,23 @@ I recently bought a puzzle at a yard sale that advertised itself as the hardest 
 
 I am also attempting to learn a bit about python, so I thought it would be a good time to do so.
 
+It produces output like this:
+----------------------------------------
+
+I win?!?!
+
+
+===========================
+   H+        D+        S+   
+C- ** D+  D- ** C+  C- ** S+ 
+   C-        C-        H-   
+
+   C+        C+        H+   
+C- ** H+  H- ** H+  H- ** D+ 
+   D-        S-        D-   
+
+   D+        S+        D+   
+S+ ** H-  H+ ** S-  S+ ** S- 
+   D-        C-        H-   
+===========================
 
