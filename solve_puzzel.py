@@ -1,4 +1,4 @@
-from puzzle_piece import puzzle_piece
+from puzzlepiece import PuzzlePiece
 
 
 north = 0
@@ -7,62 +7,66 @@ south = 2
 west  = 3
 
 # Define what the pieces look like.
-pieces = ( puzzle_piece('S+', 'D+', 'H-', 'D-' ),
-           puzzle_piece('H+', 'D+', 'C-', 'C-' ),
-           puzzle_piece('H+', 'S+', 'S-', 'C-' ),
-           puzzle_piece('H+', 'D+', 'D-', 'H-' ),
-           puzzle_piece('D+', 'C+', 'C-', 'D-' ),
-           puzzle_piece('S+', 'S+', 'H-', 'C-' ),
-           puzzle_piece('C+', 'H+', 'S-', 'H-' ),
-           puzzle_piece('C+', 'H+', 'D-', 'C-' ),
-           puzzle_piece('S+', 'D+', 'S-', 'H-' ))
+pieces = ( PuzzlePiece('S+', 'D+', 'H-', 'D-' ),
+           PuzzlePiece('H+', 'D+', 'C-', 'C-' ),
+           PuzzlePiece('H+', 'S+', 'S-', 'C-' ),
+           PuzzlePiece('H+', 'D+', 'D-', 'H-' ),
+           PuzzlePiece('D+', 'C+', 'C-', 'D-' ),
+           PuzzlePiece('S+', 'S+', 'H-', 'C-' ),
+           PuzzlePiece('C+', 'H+', 'S-', 'H-' ),
+           PuzzlePiece('C+', 'H+', 'D-', 'C-' ),
+           PuzzlePiece('S+', 'D+', 'S-', 'H-' ))
 
 # Possible places to put the pieces
 # Positions have piece index and rotation
-board = [[ puzzle_piece('??', '??', '??', '??'),
-           puzzle_piece('??', '??', '??', '??'),
-           puzzle_piece('??', '??', '??', '??')],
-         [ puzzle_piece('??', '??', '??', '??'),
-           puzzle_piece('??', '??', '??', '??'),
-           puzzle_piece('??', '??', '??', '??')],
-         [ puzzle_piece('??', '??', '??', '??'),
-           puzzle_piece('??', '??', '??', '??'),
-           puzzle_piece('??', '??', '??', '??')]]
+board = [[ PuzzlePiece('??', '??', '??', '??'),
+           PuzzlePiece('??', '??', '??', '??'),
+           PuzzlePiece('??', '??', '??', '??')],
+         [ PuzzlePiece('??', '??', '??', '??'),
+           PuzzlePiece('??', '??', '??', '??'),
+           PuzzlePiece('??', '??', '??', '??')],
+         [ PuzzlePiece('??', '??', '??', '??'),
+           PuzzlePiece('??', '??', '??', '??'),
+           PuzzlePiece('??', '??', '??', '??')]]
 
 # Path to follow when placing pieces on the board
-# Basically try in the center and spiral out.
-
-#path = [(1,1), (0,1), (0,2), (1,2), (2,2), (2,1), (2,0), (1,0), (0,0)]
 path = [(0,0), (0,1), (0,2), (1,0), (1,1), (1,2), (2,0), (2,1), (2,2)]
+
 
 def debug(*message):
     debug = False
 
     if debug:
-        print ''.join(item[0], message)
+        output = []
+        for item in message:
+            output.append(str(item))
+
+        print ''.join(output)
 
 
+# Yes I know, I should be using loops to print out the board
+# so that it can be an arbitrary size.
 def print_board(board):
     print "==========================="
-    print '  ', board[0][0].north().out(), '      ', board[0][1].north().out(), '      ', board[0][2].north().out(), '  '
-    print board[0][0].west().out(), '**', board[0][0].east().out(), '', \
-          board[0][1].west().out(), '**', board[0][1].east().out(), '', \
-          board[0][2].west().out(), '**', board[0][2].east().out(), ''
-    print '  ', board[0][0].south().out(), '      ', board[0][1].south().out(), '      ', board[0][2].south().out(), '  '
+    print '  ', board[0][0].north(), '      ', board[0][1].north(), '      ', board[0][2].north(), '  '
+    print board[0][0].west(), '**', board[0][0].east(), '', \
+          board[0][1].west(), '**', board[0][1].east(), '', \
+          board[0][2].west(), '**', board[0][2].east(), ''
+    print '  ', board[0][0].south(), '      ', board[0][1].south(), '      ', board[0][2].south(), '  '
     print
 
-    print '  ', board[1][0].north().out(), '      ', board[1][1].north().out(), '      ', board[1][2].north().out(), '  '
-    print board[1][0].west().out(), '**', board[1][0].east().out(), '', \
-          board[1][1].west().out(), '**', board[1][1].east().out(), '', \
-          board[1][2].west().out(), '**', board[1][2].east().out(), ''
-    print '  ', board[1][0].south().out(), '      ', board[1][1].south().out(), '      ', board[1][2].south().out(), '  '
+    print '  ', board[1][0].north(), '      ', board[1][1].north(), '      ', board[1][2].north(), '  '
+    print board[1][0].west(), '**', board[1][0].east(), '', \
+          board[1][1].west(), '**', board[1][1].east(), '', \
+          board[1][2].west(), '**', board[1][2].east(), ''
+    print '  ', board[1][0].south(), '      ', board[1][1].south(), '      ', board[1][2].south(), '  '
     print
 
-    print '  ', board[2][0].north().out(), '      ', board[2][1].north().out(), '      ', board[2][2].north().out(), '  '
-    print board[2][0].west().out(), '**', board[2][0].east().out(), '', \
-          board[2][1].west().out(), '**', board[2][1].east().out(), '', \
-          board[2][2].west().out(), '**', board[2][2].east().out(), ''
-    print '  ', board[2][0].south().out(), '      ', board[2][1].south().out(), '      ', board[2][2].south().out(), '  '
+    print '  ', board[2][0].north(), '      ', board[2][1].north(), '      ', board[2][2].north(), '  '
+    print board[2][0].west(), '**', board[2][0].east(), '', \
+          board[2][1].west(), '**', board[2][1].east(), '', \
+          board[2][2].west(), '**', board[2][2].east(), ''
+    print '  ', board[2][0].south(), '      ', board[2][1].south(), '      ', board[2][2].south(), '  '
     print "==========================="
     print
 
@@ -74,10 +78,10 @@ def print_board(board):
 
 def place_piece(path, board, path_idx, pieces, used):
 
-    unknown = puzzle_piece('??', '??', '??', '??')
+    unknown = PuzzlePiece('??', '??', '??', '??')
 
-    debug("Entering place_piece at depth "), path_idx
-    debug("    current path:"), used
+    debug("Entering place_piece at depth ", path_idx)
+    debug("    current path:", used)
 
     # No pieces left to try... return
     if path_idx >= len(path):
@@ -115,11 +119,11 @@ def place_piece(path, board, path_idx, pieces, used):
         east = unknown.west()
 
     # This creates a piece with all the proper shapes, but not the proper genders.
-    spot = puzzle_piece( north, east, south, west)
+    spot = PuzzlePiece( north, east, south, west)
     #spot.flip_gender()
 
     for idx in range(0,9):
-        debug("    testing piece ",idx," at depth "), path_idx
+        debug("    testing piece ",idx," at depth ", path_idx)
         if idx in used:
             debug("        piece ", idx, "has been used. NEXT!")
             next
@@ -128,7 +132,7 @@ def place_piece(path, board, path_idx, pieces, used):
             debug("      rotation = "), rotation
 
             if rotation != -1:
-                debug("placing piece[",idx,"] at ",pos_x,",",pos_y," with rotation ", rotation,".\n");
+                debug("placing piece[",idx,"] at ",pos_x,",",pos_y," with rotation ", rotation,".\n")
                 temp_piece = board[pos_x][pos_y]
                 board[pos_x][pos_y] = pieces[idx]
                 board[pos_x][pos_y].rotation = rotation
@@ -137,14 +141,14 @@ def place_piece(path, board, path_idx, pieces, used):
 
                 place_piece(path, board, path_idx + 1, pieces, used)
 
-                debug("removing piece[",idx,"] at ",pos_x,",",pos_y,".\n");
+                debug("removing piece[",idx,"] at ",pos_x,",",pos_y,".\n")
                 board[pos_x][pos_y] = temp_piece
                 #print_board(board)
                 used.pop()
 
     # If we got here we couldn't find a match for that spot on the board
     # That lead to board compleation. Return to try the next one.
-    debug("Exiting place_piece from depth "),path_idx
+    debug("Exiting place_piece from depth ",path_idx)
     return
 
 used = []

@@ -9,11 +9,11 @@
 # may be either male or female.
 #
 
-class puzzle_side:
+class PuzzleSide:
     "A single side of a puzzle piece. Has gender and shape"
 
     def __init__(self, value):
-        if isinstance(value, puzzle_side):
+        if isinstance(value, PuzzleSide):
             self.shape = value.shape
             self.gender = value.gender
         else:
@@ -29,6 +29,9 @@ class puzzle_side:
     def __eq__(self,other):
         return (self.shape == other.shape) and (self.gender == other.gender)
 
+    def __str__(self):
+        return self.shape + self.gender
+
     def flip_gender(self):
         if self.gender == '?':
             return
@@ -38,10 +41,7 @@ class puzzle_side:
         else:
             self.gender = '+'
 
-    def out(self):
-        return self.shape + self.gender
-
-class puzzle_piece:
+class PuzzlePiece:
     "A 4 sided puzzle piece."
 
     #side = []
@@ -50,10 +50,10 @@ class puzzle_piece:
     def __init__(self, north, east, south, west):
         self.rotation = 0
         self.side = []
-        self.side.append(puzzle_side(north))
-        self.side.append(puzzle_side(east))
-        self.side.append(puzzle_side(south))
-        self.side.append(puzzle_side(west))
+        self.side.append(PuzzleSide(north))
+        self.side.append(PuzzleSide(east))
+        self.side.append(PuzzleSide(south))
+        self.side.append(PuzzleSide(west))
 
     def __eq__(self, other):
         #print self.north.printable(), " ", self.east.printable(), " ", self.south.printable(), " ", self.west.printable(), "\n"
